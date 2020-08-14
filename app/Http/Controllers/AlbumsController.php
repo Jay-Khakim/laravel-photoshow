@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Album; 
 
 class AlbumsController extends Controller
 {
@@ -14,7 +15,27 @@ class AlbumsController extends Controller
     }
 
     public function store(Request $request){
-        dd($request);
+        $this->validate($request, [
+            'name' => 'required',
+            'description' => 'required',
+            'cover-image' => 'required|image',
+
+        ]);
+        $filenameWithExtention = $request->file('cover-image')->getClientOriginalName();
+        $extention = $request->file('cover-image')->getClientOriginalExtension();
+        $filename = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
+        $filenameToStore = $filename.'-'.time().'.'.$extention;
+
+        $path = $request->file('cover-image')->storeAs('public/album_covers', $filenameToStore);
+        // dd($path);
+
+        $album =new Album();
+        $album->description = $request->input('description');
+        $album->name = $request->input('name');
+        $album->cover_image = $filenameToStore;
+        $album->save();
+
+        return redirect('/albums')->with('success', 'Album Created Successfully!');
     }
 } 
 
