@@ -9,5 +9,12 @@
     "Register": "Royhatdan o'tish",
     "Confirm Password": "Parolni qayta tering",
     "Reset Password": "Parolni Yangilash",
-    "Send Password Reset Link": "Parolni Yangilanganini Yuborish"
+    "Send Password Reset Link": "Parolni Yangilanganini Yuborish",
+    "Create A New Album": "Yangi Albom Yarating",
+    "Enter the name": "Ismingizni kiriting",
+    "Description": "Malumot",
+    "Cover Image": "Ustki rasm",
+    "Choose File": "Fileni tanlang",
+    "No file chosen": "Hech qanday file tanlanmagan",
+    "Submit": "Tasdiqlash"
 }

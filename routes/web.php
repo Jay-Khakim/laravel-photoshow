@@ -16,9 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::redirect('/', '/en');
 
 Route::group(['prefix' => '{language}'], function () {
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/','AlbumsController@index' );
+    Route::get('/albums/create', 'AlbumsController@create');
+    Route::post('/albums/store', 'AlbumsController@store')->name('album-store');
 
     // Auth::routes();
 
