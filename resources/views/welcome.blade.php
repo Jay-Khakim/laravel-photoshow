@@ -65,11 +65,20 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="{{ url('/en') }}" class="nav-link">EN</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/uz') }}" class="nav-link">UZ</a>
+                </li>
+            </ul>
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
+
                         <a href="{{ route('login') }}">Login</a>
 
                         @if (Route::has('register'))
@@ -81,7 +90,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    {{__("Laravel")}}
                 </div>
 
                 <div class="links">
