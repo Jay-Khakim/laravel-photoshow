@@ -8,7 +8,8 @@ use App\Models\Album;
 class AlbumsController extends Controller
 {
     public function index(){
-        return view('albums.index');
+        $albums =Album::with('photos')->get();
+        return view('albums.index')->with('albums', $albums);
     }
     public function create(){
         return view('albums.create'); 
