@@ -8,7 +8,7 @@ use App\Models\Album;
 class AlbumsController extends Controller
 {
     public function index(){
-        $albums =Album::with('photos')->get();
+        $albums =Album::get();
         return view('albums.index')->with('albums', $albums);
     }
     public function create(){
@@ -37,6 +37,13 @@ class AlbumsController extends Controller
         $album->save();
 
         return redirect('/albums')->with('success', 'Album Created Successfully!');
+    }
+
+    public function show($language, $id){
+
+        $albums = Album::with('photos')->find($id);
+
+        return view('albums.show')->with('albums', $albums);
     }
 } 
 

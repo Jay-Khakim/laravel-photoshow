@@ -14,7 +14,7 @@
                             <p class="card-text">{{$album->description}}</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <a href=" {{route('album-show', [app()->getLocale(), $album->id])}} " class="btn btn-sm btn-outline-secondary">{{__("View")}}</a>
                                     {{-- <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button> --}}
                                 </div>
                                 <small class="text-muted"> {{$album->name}} </small>

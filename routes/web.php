@@ -14,13 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', '/en');
-
+// , 'where'=>['locale'=>'[a-zA-Z]{2}'], 'middleware'=>['setlocale']
 Route::group(['prefix' => '{language}'], function () {
     Route::get('/','AlbumsController@index' )->name("album-index");
     Route::get('/albums/create', 'AlbumsController@create')->name('album-create');
     Route::post('/albums/store', 'AlbumsController@store')->name('album-store');
+    Route::get('/albums/{id}', 'AlbumsController@show')->name('album-show'); 
 
     // Auth::routes();
 
     Route::get('/home', 'HomeController@index')->name('home');
+
+    Route::get('/photos/create', 'PhotosController@create')->name('photo-create');
+    Route::post('/photos/store', 'PhotosController@store')->name('photo-store');
 });
