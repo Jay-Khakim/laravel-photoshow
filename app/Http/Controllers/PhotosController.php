@@ -35,6 +35,12 @@ class PhotosController extends Controller
         $photo->size = $request->file('photo')->getSize();
         $photo->save();
 
-        return redirect('/albums/'. $request->input('albumId'))->with('success', 'Photo Uploaded Successfully!');
+        return redirect(app()->getLocale().'/albums/'. $request->input('albumId'))->with('success', 'Photo Uploaded Successfully!');
+    }
+    public function show($language, $id){
+
+        $albums = Photo::with('photos')->find($id);
+
+        return view('albums.show')->with('albums', $albums);
     }
 }

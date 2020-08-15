@@ -27,4 +27,5 @@ Route::group(['prefix' => '{language}'], function () {
 
     Route::get('/photos/create/{adminId}', 'PhotosController@create')->name('photo-create');
     Route::post('/photos/store', 'PhotosController@store')->name('photo-store');
+    Route::get('/photos/{id}', 'PhotosController@show')->name('photo-show'); 
 });

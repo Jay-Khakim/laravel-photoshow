@@ -35,7 +35,6 @@ class AlbumsController extends Controller
         $album->name = $request->input('name');
         $album->cover_image = $filenameToStore;
         $album->save();
-
         return redirect('/albums')->with('success', 'Album Created Successfully!');
     }
 
