@@ -4,8 +4,8 @@
       <h1> {{$albums->name}} </h1>
       <p class="lead text-muted"> {{$albums->description}} </p>
       <p>
-        <a href="#" class="btn btn-primary my-2">{{__("Upload Photo")}}</a>
-        <a href="#" class="btn btn-secondary my-2">{{__("Go Back")}}</a>
+        <a href="{{route('photo-create', [app()->getLocale(), $albums->id])}}" class="btn btn-primary my-2">{{__("Upload Photo")}}</a>
+        <a href="{{ route("album-index",  app()->getLocale())}}" class="btn btn-secondary my-2">{{__("Go Back")}}</a>
       </p>
     </div>
 @endsection

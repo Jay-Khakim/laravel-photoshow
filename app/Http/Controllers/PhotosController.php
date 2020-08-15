@@ -3,38 +3,38 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Photo;
 
 class PhotosController extends Controller
 {
-    public function index(){
-        $albums =Album::get();
-        return view('albums.index')->with('albums', $albums);
-    }
-    public function create(){
-        return view('albums.create'); 
+
+    public function create($language, $albumId){
+        return view('photos.create')->with('albumId', $albumId); 
     }
 
     public function store(Request $request){
         $this->validate($request, [
-            'name' => 'required',
+            'title' => 'required',
             'description' => 'required',
-            'cover-image' => 'required|image',
+            'photo' => 'required|image',
 
         ]);
-        $filenameWithExtention = $request->file('cover-image')->getClientOriginalName();
-        $extention = $request->file('cover-image')->getClientOriginalExtension();
+        $filenameWithExtention = $request->file('photo')->getClientOriginalName();
+        $extention = $request->file('photo')->getClientOriginalExtension();
         $filename = pathinfo($filenameWithExtention, PATHINFO_FILENAME);
         $filenameToStore = $filename.'-'.time().'.'.$extention;
 
-        $path = $request->file('cover-image')->storeAs('public/album_covers', $filenameToStore);
+        $path = $request->file('photo')->storeAs('public/albums/'. $request->input('albumId'), $filenameToStore);
         // dd($path);
 
-        $album =new Album();
-        $album->description = $request->input('description');
-        $album->name = $request->input('name');
-        $album->cover_image = $filenameToStore;
-        $album->save();
+        $photo =new Photo();
+        $photo->description = $request->input('description');
+        $photo->title = $request->input('title');
+        $photo->photo = $filenameToStore;
+        $photo->album_id = $request->input('albumId');
+        $photo->size = $request->file('photo')->getSize();
+        $photo->save();
 
-        return redirect('/albums')->with('success', 'Album Created Successfully!');
+        return redirect('/albums/'. $request->input('albumId'))->with('success', 'Photo Uploaded Successfully!');
     }
 }
